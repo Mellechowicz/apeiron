@@ -19,9 +19,25 @@ class Options:
         self.fix_data()
 
     def fix_data(self):
-        print( self.opt.__dict__['sigmoid'])
-        self.opt.__dict__['sigmoid'] = np.array(self.opt.__dict__['sigmoid'])
-
+        self.opt.__dict__['sigmoid']         = np.array(self.opt.__dict__['sigmoid'])
+        self.opt.__dict__['distribution']    = self.opt.__dict__['distribution'].lower()
+        self.opt.__dict__['mode']            = self.opt.__dict__['mode'].lower()
+        if 'all' in self.opt.__dict__['mode']:
+            self.opt.__dict__['mode'] = 'atoms;directions'
+        if self.opt.__dict__['mean'] is not None:
+            self.opt.__dict__['sigmoid']         = np.array([self.opt.__dict__['mean'],
+		                                            *self.opt.__dict__['sigmoid']])
+        if self.opt.__dict__['distribution'] in ['beta', 'binomial', 'f', 'gamma', 'gumbel',
+			                         'laplace', 'logistic', 'lognormal', 
+						 'multinomial', 'multivariate_normal',
+						 'negative_binomial', 'noncentral_chisquare',
+						 'normal', 'uniform', 'vonmises', 'wald',
+						 'hypergeometric', 'noncentral_f', 'triangular'] \
+						 and len(self.opt.__dict__['sigmoid']) < 2:
+            self.opt.__dict__['sigmoid']         = np.array([0.0, *self.opt.__dict__['sigmoid']])
+        if self.opt.__dict__['distribution'] in ['hypergeometric', 'noncentral_f', 'triangular'] \
+			                         and len(self.opt.__dict__['sigmoid']) < 3:
+            self.opt.__dict__['sigmoid']         = np.array([0.0, *self.opt.__dict__['sigmoid']])
 
     def add_arguments_io(self):
         self.parser.add_argument('--input', '-i', default='POSCAR',
@@ -40,11 +56,19 @@ class Options:
         self.parser.add_argument('--distribution', '-d', default='normal',
 			help='Probablity density function used for random number generator:\
 				\"normal\"(default)\
-				\"uniform\"')
+                                \"uniform\", \"beta\", \"binomial\", \"chisquare\", \"dirichlet\",\
+				\"exponential\", \"f\", \"gamma\", \"geometric\", \"gumbel\",\
+				\"hypergeometric\", \"laplace\", \"logistic\", \"lognormal\",\
+				\"logseries\", \"multinomial\", \"multivariate_normal\",\
+				\"negative_binomial\", \"noncentral_chisquare\", \"noncentral_f\",\
+				\"pareto\", \"poisson\", \"power\", \"rayleigh\", \"standard_cauchy\",\
+				\"standard_exponential\", \"standard_gamma\", \"standard_normal\",\
+				\"standard_t\", \"triangular\", \"vonmises\", \"wald\", \"weibull\",\
+				\"zipf\" cf. https://numpy.org/doc/stable/reference/random/generator.html')
         self.parser.add_argument('--seed', '-S', type=int, default=None,
-			help='pseudorandom number generator')
-        self.parser.add_argument('--mean', '-m', type=np.float, default=0.0,
-                help='mean value of the distribution (default 0)')
+			help='seed for the pseudorandom number generator')
+        self.parser.add_argument('--mean', '-m', type=np.float, default=None,
+                help='mean value of the distribution; if set will prepend sigmoid list')
         self.parser.add_argument('--sigmoid', '-s', default=[1e-4],nargs='+',type=np.float,
 			help='parameters of the distribution (number may vary; default: 1e-4 each)')
 
