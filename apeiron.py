@@ -7,277 +7,88 @@ from argv import Options
 from sys import argv
 
 options = Options(*argv)
-
-# Read them from cmd line
 # RANDOM GENERATOR
-mean     = options('mean') 
-sigmoid  = options('sigmoid') 
-print(mean,*sigmoid)
-
 if options('seed') is not None:
 	np.random.seed(seed=options('seed'))
 
 def distribution(name,*args,**kwargs):
-	if   name  == 'normal':
-		try:
+	try:
+		if   name  == 'normal':
 			return np.random.normal(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'uniform':
-		try:
+		elif name  == 'uniform':
 			return np.random.uniform(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'beta':
-		try:
+		elif name  == 'beta':
 			return np.random.beta(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'binomial':
-		try:
+		elif name  == 'binomial':
 			return np.random.binomial(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'chisquare':
-		try:
+		elif name  == 'chisquare':
 			return np.random.chisquare(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'dirichlet':
-		try:
+		elif name  == 'dirichlet':
 			return np.random.dirichlet(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'exponential':
-		try:
+		elif name  == 'exponential':
 			return np.random.exponential(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'f':
-		try:
+		elif name  == 'f':
 			return np.random.f(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'gamma':
-		try:
+		elif name  == 'gamma':
 			return np.random.gamma(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'geometric':
-		try:
+		elif name  == 'geometric':
 			return np.random.geometric(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'gumbel':
-		try:
+		elif name  == 'gumbel':
 			return np.random.gumbel(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'hypergeometric':
-		try:
+		elif name  == 'hypergeometric':
 			return np.random.hypergeometric(*args[:3],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'laplace':
-		try:
+		elif name  == 'laplace':
 			return np.random.laplace(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'logistic':
-		try:
+		elif name  == 'logistic':
 			return np.random.logistic(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'lognormal':
-		try:
+		elif name  == 'lognormal':
 			return np.random.lognormal(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'logseries':
-		try:
+		elif name  == 'logseries':
 			return np.random.logseries(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'multinomial':
-		try:
+		elif name  == 'multinomial':
 			return np.random.multinomial(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'multivariate_normal':
-		try:
+		elif name  == 'multivariate_normal':
 			return np.random.multivariate_normal(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'negative_binomial':
-		try:
+		elif name  == 'negative_binomial':
 			return np.random.negative_binomial(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'noncentral_chisquare':
-		try:
+		elif name  == 'noncentral_chisquare':
 			return np.random.noncentral_chisquare(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'noncentral_f':
-		try:
+		elif name  == 'noncentral_f':
 			return np.random.noncentral_f(*args[:3],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'normal':
-		try:
-			return np.random.normal(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'pareto':
-		try:
+		elif name  == 'pareto':
 			return np.random.pareto(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'poisson':
-		try:
+		elif name  == 'poisson':
 			return np.random.poisson(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'power':
-		try:
+		elif name  == 'power':
 			return np.random.power(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'rayleigh':
-		try:
+		elif name  == 'rayleigh':
 			return np.random.rayleigh(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'standard_cauchy':
-		try:
+		elif name  == 'standard_cauchy':
 			return np.random.standard_cauchy(**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'standard_exponential':
-		try:
+		elif name  == 'standard_exponential':
 			return np.random.standard_exponential(**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'standard_gamma':
-		try:
+		elif name  == 'standard_gamma':
 			return np.random.standard_gamma(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'standard_normal':
-		try:
+		elif name  == 'standard_normal':
 			return np.random.standard_normal(**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'standard_t':
-		try:
+		elif name  == 'standard_t':
 			return np.random.standard_t(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'triangular':
-		try:
+		elif name  == 'triangular':
 			return np.random.triangular(*args[:3],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'uniform':
-		try:
-			return np.random.uniform(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'vonmises':
-		try:
+		elif name  == 'vonmises':
 			return np.random.vonmises(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'wald':
-		try:
+		elif name  == 'wald':
 			return np.random.wald(*args[:2],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'weibull':
-		try:
+		elif name  == 'weibull':
 			return np.random.weibull(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
-	elif name  == 'zipf':
-		try:
+		elif name  == 'zipf':
 			return np.random.zipf(*args[:1],**kwargs)
-		except (TypeError,ValueError) as err:
-			print("You probably feed the distribution with wrong numbers")
-			print(err)
-			exit()
+	except (TypeError,ValueError) as err:
+		print("You probably feed the distribution with wrong numbers")
+		print(err)
+		exit()
 
+sigmoid  = options('sigmoid') 
 
 # Parsing POSCAR file (first arg)
 parser = POSCARloader(options('input'))
